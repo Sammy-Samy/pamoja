@@ -3,7 +3,7 @@
 > Revolutionizing group payments on Stellar — Built for Africa 🚀
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
-[![CI](https://github.com/pamoja-app/pamoja/actions/workflows/ci.yml/badge.svg)](https://github.com/pamoja-app/pamoja/actions/workflows/ci.yml)
+[![CI](https://github.com/Sammy-Samy/pamoja/actions/workflows/ci.yml/badge.svg)](https://github.com/Sammy-Samy/pamoja/actions/workflows/ci.yml)
 [![Stellar](https://img.shields.io/badge/Stellar-Soroban-blue)](https://soroban.stellar.org)
 [![Next.js](https://img.shields.io/badge/Next.js-14-black)](https://nextjs.org)
 
