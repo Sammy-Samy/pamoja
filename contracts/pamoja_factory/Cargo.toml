@@ -1,0 +1,18 @@
+[package]
+name = "pamoja_factory"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+[lib]
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+soroban-sdk = { version = "21.0.0" }
+pamoja_group = { path = "../pamoja_group", features = ["testutils"] }
+
+[dev-dependencies]
+soroban-sdk = { version = "21.0.0", features = ["testutils"] }
+
+[features]
+testutils = ["soroban-sdk/testutils", "pamoja_group/testutils"]
