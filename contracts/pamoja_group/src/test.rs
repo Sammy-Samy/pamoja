@@ -9,7 +9,7 @@ use crate::{Member, PamojaGroup, PamojaGroupClient};
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
-fn setup_token(env: &Env, admin: &Address) -> (Address, token::StellarAssetClient<'_>) {
+fn setup_token<'a>(env: &'a Env, admin: &Address) -> (Address, token::StellarAssetClient<'a>) {
     let token_admin = Address::generate(env);
     let contract_id = env.register_stellar_asset_contract_v2(token_admin.clone());
     let sac = token::StellarAssetClient::new(env, &contract_id.address());

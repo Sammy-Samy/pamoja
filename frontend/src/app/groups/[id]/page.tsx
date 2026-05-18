@@ -8,7 +8,6 @@ import { getGroupMembers } from "@/lib/contracts";
 import { useDistribute } from "@/hooks/useDistribute";
 import { useWallet } from "@/hooks/useWallet";
 import { bpsToPercent, shortenAddress } from "@/lib/utils";
-import { NETWORK } from "@/lib/network";
 
 // XLM native token address on Stellar
 const XLM_TOKEN = "CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC";

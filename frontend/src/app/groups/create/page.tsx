@@ -6,7 +6,6 @@ import { toast } from "sonner";
 import { Plus, Trash2, Users } from "lucide-react";
 import { useCreateGroup } from "@/hooks/useCreateGroup";
 import { useWallet } from "@/hooks/useWallet";
-import { bpsToPercent } from "@/lib/utils";
 
 interface MemberRow {
   address: string;
