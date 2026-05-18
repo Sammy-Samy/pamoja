@@ -1,6 +1,6 @@
-import type { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
+
+const nextConfig = {
   reactStrictMode: true,
   // Required for Stellar SDK (uses Node.js built-ins)
   webpack: (config) => {
