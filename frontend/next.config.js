@@ -1,5 +1,4 @@
-
-
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
   // Required for Stellar SDK (uses Node.js built-ins)
@@ -14,4 +13,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

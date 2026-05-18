@@ -10,7 +10,14 @@ use soroban_sdk::{
     Symbol, Val, Vec,
 };
 
-use pamoja_group::Member;
+/// Mirror of `pamoja_group::Member` — kept in sync manually.
+/// Defined here to avoid linking the group crate into the factory WASM.
+#[contracttype]
+#[derive(Clone)]
+pub struct Member {
+    pub address: Address,
+    pub bps: u32,
+}
 
 #[contracttype]
 pub enum DataKey {
