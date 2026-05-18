@@ -6,9 +6,8 @@
 #![no_std]
 
 use soroban_sdk::{
-    contract, contractimpl, contracttype,
-    xdr::ToXdr,
-    Address, BytesN, Env, IntoVal, Map, String, Symbol, Val, Vec,
+    contract, contractimpl, contracttype, xdr::ToXdr, Address, BytesN, Env, IntoVal, Map, String,
+    Symbol, Val, Vec,
 };
 
 use pamoja_group::Member;
@@ -32,7 +31,9 @@ impl PamojaFactory {
         }
         admin.require_auth();
         env.storage().instance().set(&DataKey::Admin, &admin);
-        env.storage().instance().set(&DataKey::GroupWasm, &group_wasm_hash);
+        env.storage()
+            .instance()
+            .set(&DataKey::GroupWasm, &group_wasm_hash);
         env.storage().instance().set(&DataKey::GroupCount, &0_u32);
         env.storage()
             .instance()
@@ -41,12 +42,7 @@ impl PamojaFactory {
 
     /// Deploy a new group child contract and initialise it.
     /// Returns the new contract's address.
-    pub fn create_group(
-        env: Env,
-        creator: Address,
-        name: String,
-        members: Vec<Member>,
-    ) -> Address {
+    pub fn create_group(env: Env, creator: Address, name: String, members: Vec<Member>) -> Address {
         creator.require_auth();
 
         let wasm_hash: BytesN<32> = env
@@ -68,11 +64,7 @@ impl PamojaFactory {
         args.push_back(name.clone().into_val(&env));
         args.push_back(members.into_val(&env));
 
-        let _: Val = env.invoke_contract(
-            &group_address,
-            &Symbol::new(&env, "initialize"),
-            args,
-        );
+        let _: Val = env.invoke_contract(&group_address, &Symbol::new(&env, "initialize"), args);
 
         let mut groups: Map<Address, String> = env
             .storage()
@@ -102,11 +94,17 @@ impl PamojaFactory {
     }
 
     pub fn group_count(env: Env) -> u32 {
-        env.storage().instance().get(&DataKey::GroupCount).unwrap_or(0)
+        env.storage()
+            .instance()
+            .get(&DataKey::GroupCount)
+            .unwrap_or(0)
     }
 
     pub fn get_admin(env: Env) -> Address {
-        env.storage().instance().get(&DataKey::Admin).expect("not initialised")
+        env.storage()
+            .instance()
+            .get(&DataKey::Admin)
+            .expect("not initialised")
     }
 
     pub fn update_wasm(env: Env, new_hash: BytesN<32>) {

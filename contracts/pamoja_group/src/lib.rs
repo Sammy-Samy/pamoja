@@ -6,9 +6,7 @@
 
 #![no_std]
 
-use soroban_sdk::{
-    contract, contractimpl, contracttype, token, Address, Env, Map, String, Vec,
-};
+use soroban_sdk::{contract, contractimpl, contracttype, token, Address, Env, Map, String, Vec};
 
 // ── Storage keys ────────────────────────────────────────────────────────────
 
@@ -16,7 +14,7 @@ use soroban_sdk::{
 pub enum DataKey {
     Admin,
     GroupName,
-    Members,   // Map<Address, u32>  — address → basis points (total must = 10_000)
+    Members, // Map<Address, u32>  — address → basis points (total must = 10_000)
     Active,
     TotalDistributed,
 }
@@ -46,12 +44,7 @@ impl PamojaGroup {
     /// * `admin`   – address that can update the group
     /// * `name`    – human-readable group name
     /// * `members` – list of (address, bps) pairs; bps must sum to 10_000
-    pub fn initialize(
-        env: Env,
-        admin: Address,
-        name: String,
-        members: Vec<Member>,
-    ) {
+    pub fn initialize(env: Env, admin: Address, name: String, members: Vec<Member>) {
         // Prevent re-initialisation
         if env.storage().instance().has(&DataKey::Admin) {
             panic!("already initialised");
@@ -69,7 +62,9 @@ impl PamojaGroup {
         env.storage().instance().set(&DataKey::GroupName, &name);
         env.storage().instance().set(&DataKey::Members, &map);
         env.storage().instance().set(&DataKey::Active, &true);
-        env.storage().instance().set(&DataKey::TotalDistributed, &0_i128);
+        env.storage()
+            .instance()
+            .set(&DataKey::TotalDistributed, &0_i128);
     }
 
     // ── Distribution ─────────────────────────────────────────────────────────
@@ -81,7 +76,11 @@ impl PamojaGroup {
     pub fn distribute(env: Env, sender: Address, token: Address, amount: i128) {
         sender.require_auth();
 
-        let active: bool = env.storage().instance().get(&DataKey::Active).unwrap_or(false);
+        let active: bool = env
+            .storage()
+            .instance()
+            .get(&DataKey::Active)
+            .unwrap_or(false);
         assert!(active, "group is inactive");
         assert!(amount > 0, "amount must be positive");
 
@@ -174,23 +173,38 @@ impl PamojaGroup {
     // ── Views ────────────────────────────────────────────────────────────────
 
     pub fn get_admin(env: Env) -> Address {
-        env.storage().instance().get(&DataKey::Admin).expect("not initialised")
+        env.storage()
+            .instance()
+            .get(&DataKey::Admin)
+            .expect("not initialised")
     }
 
     pub fn get_name(env: Env) -> String {
-        env.storage().instance().get(&DataKey::GroupName).expect("not initialised")
+        env.storage()
+            .instance()
+            .get(&DataKey::GroupName)
+            .expect("not initialised")
     }
 
     pub fn get_members(env: Env) -> Map<Address, u32> {
-        env.storage().instance().get(&DataKey::Members).expect("not initialised")
+        env.storage()
+            .instance()
+            .get(&DataKey::Members)
+            .expect("not initialised")
     }
 
     pub fn is_active(env: Env) -> bool {
-        env.storage().instance().get(&DataKey::Active).unwrap_or(false)
+        env.storage()
+            .instance()
+            .get(&DataKey::Active)
+            .unwrap_or(false)
     }
 
     pub fn total_distributed(env: Env) -> i128 {
-        env.storage().instance().get(&DataKey::TotalDistributed).unwrap_or(0)
+        env.storage()
+            .instance()
+            .get(&DataKey::TotalDistributed)
+            .unwrap_or(0)
     }
 
     // ── Helpers ──────────────────────────────────────────────────────────────

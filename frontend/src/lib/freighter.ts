@@ -5,33 +5,30 @@
  */
 import {
   isConnected,
-  getAddress,
+  getPublicKey,
   signTransaction,
   requestAccess,
 } from "@stellar/freighter-api";
 import { NETWORK } from "./network";
 
 export async function isFreighterInstalled(): Promise<boolean> {
-  const result = await isConnected();
-  return result.isConnected;
+  return isConnected();
 }
 
 export async function connectWallet(): Promise<string> {
-  const access = await requestAccess();
-  if (access.error) throw new Error(access.error);
-  return access.address;
+  return requestAccess();
 }
 
 export async function getWalletAddress(): Promise<string | null> {
-  const result = await getAddress();
-  if (result.error) return null;
-  return result.address;
+  try {
+    return await getPublicKey();
+  } catch {
+    return null;
+  }
 }
 
 export async function signTx(xdr: string): Promise<string> {
-  const result = await signTransaction(xdr, {
+  return signTransaction(xdr, {
     networkPassphrase: NETWORK.networkPassphrase,
   });
-  if (result.error) throw new Error(result.error);
-  return result.signedTxXdr;
 }
