@@ -27,7 +27,7 @@ jobs:
           cache-dependency-path: pnpm-lock.yaml
 
       - name: Install Vercel CLI
-        run: pnpm add -g vercel@37.4.2
+        run: pnpm add -g vercel@latest
 
       - name: Pull Vercel environment
         working-directory: frontend
