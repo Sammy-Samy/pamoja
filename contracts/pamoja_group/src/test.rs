@@ -19,8 +19,14 @@ fn setup_token(env: &Env, admin: &Address) -> (Address, token::StellarAssetClien
 
 fn two_members(env: &Env, a: &Address, b: &Address) -> Vec<Member> {
     let mut v = Vec::new(env);
-    v.push_back(Member { address: a.clone(), bps: 6_000 });
-    v.push_back(Member { address: b.clone(), bps: 4_000 });
+    v.push_back(Member {
+        address: a.clone(),
+        bps: 6_000,
+    });
+    v.push_back(Member {
+        address: b.clone(),
+        bps: 4_000,
+    });
     v
 }
 
@@ -115,8 +121,14 @@ fn test_distribute_dust_goes_to_first_member() {
 
     // 3333 + 6667 = 10000 bps
     let mut members = Vec::new(&env);
-    members.push_back(Member { address: alice.clone(), bps: 3_333 });
-    members.push_back(Member { address: bob.clone(), bps: 6_667 });
+    members.push_back(Member {
+        address: alice.clone(),
+        bps: 3_333,
+    });
+    members.push_back(Member {
+        address: bob.clone(),
+        bps: 6_667,
+    });
 
     client.initialize(&admin, &String::from_str(&env, "Dust"), &members);
 
@@ -148,7 +160,10 @@ fn test_update_members() {
 
     // Replace with carol taking 100%
     let mut new_members = Vec::new(&env);
-    new_members.push_back(Member { address: carol.clone(), bps: 10_000 });
+    new_members.push_back(Member {
+        address: carol.clone(),
+        bps: 10_000,
+    });
     client.update_members(&new_members);
 
     let members = client.get_members();
@@ -218,7 +233,10 @@ fn test_invalid_bps_panics() {
     let client = PamojaGroupClient::new(&env, &contract_id);
 
     let mut bad_members = Vec::new(&env);
-    bad_members.push_back(Member { address: alice.clone(), bps: 5_000 }); // only 50%
+    bad_members.push_back(Member {
+        address: alice.clone(),
+        bps: 5_000,
+    }); // only 50%
 
     client.initialize(&admin, &String::from_str(&env, "Bad"), &bad_members);
 }
