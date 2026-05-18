@@ -2,7 +2,7 @@
   "framework": "nextjs",
   "buildCommand": "pnpm build",
   "devCommand": "pnpm dev",
-  "installCommand": "pnpm install",
+  "installCommand": "cd .. && pnpm install",
   "outputDirectory": ".next",
   "env": {
     "NEXT_PUBLIC_STELLAR_NETWORK": "testnet",
