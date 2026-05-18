@@ -1,10 +1,9 @@
 #![cfg(test)]
 
-use soroban_sdk::{testutils::Address as _, Address, BytesN, Env, String, Vec};
-
-use pamoja_group::{Member, PamojaGroup};
+use soroban_sdk::{testutils::Address as _, Address, BytesN, Env};
 
 use crate::{PamojaFactory, PamojaFactoryClient};
+use pamoja_group::PamojaGroup;
 
 fn dummy_wasm_hash(env: &Env) -> BytesN<32> {
     // Register the group contract and get its wasm hash for testing

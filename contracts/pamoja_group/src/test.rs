@@ -1,9 +1,6 @@
 #![cfg(test)]
 
-use soroban_sdk::{
-    testutils::{Address as _, AuthorizedFunction, AuthorizedInvocation},
-    token, Address, Env, String, Vec,
-};
+use soroban_sdk::{testutils::Address as _, token, Address, Env, String, Vec};
 
 use crate::{Member, PamojaGroup, PamojaGroupClient};
 
