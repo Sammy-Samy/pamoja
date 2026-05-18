@@ -24,7 +24,7 @@ jobs:
         with:
           node-version: "20"
           cache: pnpm
-          cache-dependency-path: frontend/pnpm-lock.yaml
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install Vercel CLI
         run: pnpm add -g vercel@37.4.2
